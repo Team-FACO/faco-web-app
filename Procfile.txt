@@ -1,1 +1,1 @@
-web: gunicorn ase.wsgi
+web: gunicorn website.wsgi
