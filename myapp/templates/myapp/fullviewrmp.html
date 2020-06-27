@@ -1,0 +1,129 @@
+{% extends 'myapp/base.html' %}
+
+{% load static %}
+
+{% block content %}
+    <script>
+
+    </script>
+    <!-- NAV BAR -->
+
+    <style>
+        .checked{
+            color: orange;
+        }
+        .button {
+            border: none;
+            color: #00B4CC;
+            width: 180px;
+            background-color: #edecea;
+            padding: 15px 35px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 20px;
+            margin: 4px 2px;
+            cursor: pointer;
+            height: 100px;
+        }
+        .button:hover{
+            background-color: #777777;
+            color: white;
+        }
+        td{
+            padding:15px 45px;
+            font-size: 17px;
+        }
+        .bg{
+            height: 1000px;
+            min-width: 1200px;
+            left: -50px;
+            border-radius: 12px;
+            position: relative;
+            bottom: -100px;
+            background-color: rgba(124,135,140,0.33);
+            padding: 30px;
+            box-shadow: 0px 20px 80px 0px grey;
+        }
+        image{
+            border-radius: 15px;
+        }
+        button{
+            border-radius: 15px;
+            width: 180px;
+        }
+
+    </style>
+
+
+    <div class="container_fulid" style="margin-top: 5%">
+        <div class="bg">
+            <div class="container" style="margin-top: 5%">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="col-md-8" style='padding: 5px 15px'>
+                            <span style="font-size: 35px; ">{{profile.first_name}} {{profile.last_name}}</span>&nbsp&nbsp&nbsp
+
+                        </div>
+                        <br><br>
+                        <div class="btn-group btn-group-md" style='padding: 2px 15px'>
+                            <a href='{{ profile.get_absolute_url_rmp_upcoming_appointments}}'> <button class="button">Upcoming Appointments</button></a>
+                            <a href='{{ profile.get_absolute_url_rmp_attended_appointments}}'><button class="button">Attended Appointments</button></a>
+                            <a href='{{ profile.get_absolute_url_rmp_patientdetail }}'><button class="button">Patient details</button></a>
+                            <a href='{% url "myapp:rmp_order_history" profile.id %}'> <button class="button">Orders</button></a>
+                        </div>
+
+                        <br><br>
+
+
+                        <div style='padding: 0px 45px'>
+                            <hr>
+                        </div>
+                        <br>
+
+                        <!-- <div style="display: none;" id="Experience">
+                            <span style="font-size: 17px;">Doctors's experience will be here.</span>
+                        </div> -->
+
+                        <div style="padding: 5px 45px;font-size: 16px;opacity: 0.5;">
+                            BASIC INFORMATION
+                        </div><br>
+                        <div>
+                            <table>
+
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>{{profile.gender}}</td>
+                                </tr>
+                            </table>
+                        </div><br>
+                        <div style="padding: 15px 45px;font-size: 16px;opacity: 0.5;">
+                            <a name="contact"></a>
+                            CONTACT INFORMATION
+                        </div><br>
+                        <table>
+                            <tr>
+                                <td>Phone</td>
+                                <td>+91{{profile.mobile_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>Locality</td>
+                                <td>{{profile.locality}}</td>
+                            </tr>
+                            <tr>
+                                <td>Hospital</td>
+                                <td>{{profile.hospital}}</td>
+                            </tr>
+                            <tr>
+                                <td>E-Mail</td>
+                                <td>{{profile.email_id}}</td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <br><br><br><br>
+
+{% endblock %}

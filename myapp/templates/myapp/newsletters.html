@@ -1,0 +1,64 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+            font-size: 20px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+        tr:nth-child(odd) {
+            background-color: #a5a9ad;
+        }
+    </style>
+    <h3><em style="font-size: 50px;">Newsletters</em></h3>
+        
+        <div class="container-fluid">
+                <div class="col-sm-8 col-md-12" style="padding-right:20px">
+
+                    <div class="panel panel-default" style="padding-right:20px">
+                        <div class="panel-body">
+                          <br>
+
+                      {% if error_message %}
+                          <p><strong>{{ error_message }}</strong></p>
+                      {% endif %}
+                      <br>
+                      <table class="table table-striped table-hover ">
+                          <thead>
+                          <tr>
+                              <th>Name</th>
+                              <th>Email</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          {% for feeds in feedback1 %}
+                      
+                              <tr>                                  
+                                  <td> {{feeds.name}}</td>
+                                  <td> {{feeds.email}}</td>
+                              </tr>
+                          {% endfor %}
+                          </tbody>
+                      </table>
+                      <div class="alert alert-warning">
+                          {{context}}
+                      </div>
+
+                  </div>
+              </div>
+
+          </div>
+
+      </div>
+{% endblock %}

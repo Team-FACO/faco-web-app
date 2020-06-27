@@ -1,0 +1,289 @@
+{% extends 'base.html' %}
+
+{% load widget_tweaks %}
+{% load static %}
+{% block contact %}
+
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container">
+      <a href='{% url "home" %}' class="navbar-brand"><b>FACO</b></a>
+      <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href='{% url "home" %}' class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href='{% url "about" %}' class="nav-link">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href='{% url "how_we_work" %}' class="nav-link">How we work</a>
+          </li>
+          <li class="nav-item active">
+            <a href='{% url "contact" %}' class="nav-link">Contact</a>
+          </li>
+         {% if request.user.is_authenticated %}
+          <li class="nav-item">
+            <a href='{% url "logout" %}' class="nav-link">Logout</a>
+          </li>
+          {% else %}
+
+          <li class="nav-item">
+            <a href='{% url "login" %}' class="nav-link">Doctor</a>
+          </li>
+           <li class="nav-item">
+            <a href='{% url "rmp:login_rmp_profile" %}' class="nav-link">Patient</a>
+          </li>
+          {% endif %}
+
+          <li class="nav-item">
+            <a href='{% url "shoppingPortalApp:main" %}' class="nav-link">Shop Medicines</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+    <header id="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 m-auto text-center">
+                    <b><h1>Contact Us</h1></b>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h4>Get In Touch</h4>
+                        <p>Have any queries? Just leave a message or call us.</p>
+                        <h4>Address</h4>
+                        <p>Jaipur,Rajasthan,India</p>
+                        <h4>Email</h4>
+                        <p>support@faco-care.online</p>
+                        <h4>Phone</h4>
+                        <p>+91 8005665592</p>
+                        <p>You can also contact us on facebook. Please click on message us button below to message us.</p>
+
+
+<div class="fb-messengermessageus"
+  messenger_app_id="323145528483418"
+  page_id="255118918510880"
+  color="white"
+  size="large" >
+</div>
+            </div>
+          </div>
+        </div>
+                  
+                
+
+           
+            <div class="col-md-8">
+                <div class="card p-4">
+                    <div class="card-body">
+                        <h3 class="text-center">Please fill out this form to contact us</h3>
+                        <hr>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{form.first_name | add_class:"form-control" | attr:"placeholder:First Name" }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{form.last_name | add_class:"form-control" | attr:"placeholder:Last Name" }}
+
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{form.email | add_class:"form-control" | attr:"placeholder:Email" }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {{form.mobile_no | add_class:"form-control" | attr:"placeholder:Phone Number" }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {{form.message | add_class:"form-control" | attr:"placeholder:Message" }}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="submit" value="Submit" class="btn btn-outline-danger btn-block">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                appId      : '323145528483418',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+
+    <!-- STAFF -->
+    <section id="staff" class="py-5 text-center bg-dark text-white">
+        <div class="container">
+            <h1>Our Family</h1>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <h4>Sahil</h4>
+                    <small>Founder & CEO</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Udit</h4>
+                    <small>Developer</small>
+                </div>
+                <div class="col-md-4">
+
+                    <h4>Ruben</h4>
+                    <small>Data Scientist</small>
+                </div>
+                <br>
+                <div class="col-md-4">
+
+                    <h4>Nikita</h4>
+                    <small>Web Developer</small>
+                </div>
+                 <div class="col-md-4">
+                    <h4>Prachi</h4>
+                    <small>Data Scientists</small>
+                </div>
+
+                <div class="col-md-4">
+                    <h4>Gauri</h4>
+                    <small>Medical Expert</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Sujit</h4>
+                    <small>Data Scientists</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Ruthy</h4>
+                    <small>Web Developer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Elana</h4>
+                    <small>Product Designer</small>
+                </div>
+
+                <div class="col-md-4">
+                    <h4>Okpo</h4>
+                    <small>Software Engineer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Anu</h4>
+                    <small>Front End Developer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Rina</h4>
+                    <small>UI/UX Designer & Marketing Specialist</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Archit</h4>
+                    <small>UI/UX Designer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Tejiri(Emaliasa)</h4>
+                    <small>UI/UX Designer</small>
+                </div>
+
+
+                <div class="col-md-4">
+                    <h4>Navneet</h4>
+                    <small>Cinematographer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Gavakshit</h4>
+                    <small>Public Relation</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Ntongha</h4>
+                    <small>Data Scientist</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Prof. Francisco</h4>
+                    <small>Data Scientists</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Shraddha</h4>
+                    <small>Medical Expert</small>
+                </div>
+
+                <div class="col-md-4">
+                    <h4>Ksenia</h4>
+                    <small>Business</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Hamza</h4>
+                    <small>Mobile App Developer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Vivian</h4>
+                    <small>Medical Expert</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Dr. Jaffly</h4>
+                    <small>Medical Expert</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Kirti</h4>
+                    <small>Medical Expert</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Nidhi</h4>
+                    <small>Web Developer</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Sakshi</h4>
+                    <small>Business Strategist</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Utsav</h4>
+                    <small>Business Strategist</small>
+                </div>
+                <div class="col-md-4">
+                    <h4>Abhishek</h4>
+                    <small>Business Strategist</small>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

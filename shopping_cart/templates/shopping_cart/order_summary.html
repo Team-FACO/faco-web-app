@@ -1,0 +1,194 @@
+{% extends "shopping_cart/base.html" %}
+{% load widget_tweaks %}
+
+
+{% block order_summary %}
+{{ block.super }}
+<br>
+<div class="container">
+	<div class="row">
+		<div class="col-md-12" style="text-align: center;">
+			<h2>ORDER SUMMARY</h2><hr>
+		</div>
+	</div><br>
+	{% if order.get_cart_items %}
+	<div class="row">
+		<div class="col-md-7">
+			<div class="container">
+				<div class="row" >
+					<div class="col-md-12">
+						<h3>ORDERS</h3>
+						<hr>
+					</div>
+					<div class="container">
+				{% for item in order.get_cart_items %}
+				
+					<div class="row">
+					<div class="col-md-12 order_item">
+						<div class="container">
+						<div class="row">
+							<div class="col-md-4">
+								<img src="{{ item.product.image.url }}" class="img-responsive" width="100" height="100">
+							</div>
+							<div class="col-md-6">
+								<h6>{{ item.product.name }}</h6>
+								{{ item.product.updated }}<br>
+								<span style="color: red;font-size: 15px;"><i class="fa fa-rupee" style="font-size:15px;color:red"></i>	{{ item.product.price }}</span><br>
+								Manufactured By 
+								<a href="" style="text-decoration: none;">
+									{{ item.product.manufacturedBy }}
+								</a>
+							</div>
+							<div class="col-md-2" style="text-align: center;">
+								<div class="delete" style="width: 50%;">
+									<a href="{% url 'shopping_cart:delete_from_cart' item.product.id %}" data-toggle="tooltip" data-placement="bottom" title="Remove"style="text-decoration: none;">
+										<span class="delete-link"><i class="fa fa-close "></i></span>
+									</a>
+								</div><br>
+								<select id="{{ item.product.name }}">
+									<option value="0">{{item.quantity}}</option>
+									<option value="1">
+										1
+									</option>
+									<option value="2">
+										2
+									</option>
+									<option value="3">
+										3
+									</option>
+									<option value="4">
+										4
+									</option>
+									<option value="5">
+										5
+									</option>
+								</select>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			<br>
+
+					{% endfor %}</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="col-md-4" >
+			<div class="row" style="background-color: rgb(242,242,244);">
+				<div class="col-md-12">
+					<h1>To Pay</h1><hr>
+				</div>
+				<div class="col-md-12">
+					<h4>Order ID : <span style="color: blue;">{{order.ref_code}}</span></h4>
+				</div><br><br><br>
+				<div class="col-md-12">
+
+						<div class="row">
+							<div class="col-md-5" style="text-align: left;"><b>Medicine</b></div>
+							<div class="col-md-3" style="text-align: center;"><b>Quantity</b></div>
+							<div class="col-md-4"  style="text-align: right;"><b>Price</b></div>
+						</div>
+						{% for item in order.get_cart_items %}
+						<div class="row">
+							<div class="col-md-5"  style="text-align: left;">
+								{{ item.product.name }} 
+							</div>
+							<div class="col-md-3"  style="text-align: center;">
+								<span class="quantity_no">{{ item.quantity }}</span>
+							</div>
+							<div class="col-md-4" style="text-align: right;">
+								Rs. <span style="color: red;">{{ item.order_item_total }}</span>
+							</div>
+						</div>
+						{% endfor %}
+						<hr>
+						<div class="row">
+							<div class="col-md-6" style="text-align: left;">
+								<h5>Total</h5>
+							</div>
+							<div class="col-md-6" style="text-align: right;">
+								<h5>Rs. <span style="color: red;">{{ order.get_cart_total }}</span></h5>
+							</div>
+						</div><br>
+						<div class="row">
+							<div class="col-md-12" style="text-align: center;">
+								<a href="{% url 'shopping_cart:enter_address' %}" style="text-decoration: none;" class="button button1">
+									Proceed to Checkout &nbsp<i class="fa fa-chevron-circle-right"></i>
+								</a>
+							</div>
+							<div class="col-md-12" style="text-align: center;">
+								<a href="{% url 'shoppingPortalApp:main' %}" style="text-decoration: none;" class="button button2">
+									<i class="fa fa-chevron-circle-left"></i> &nbsp Add more Medicines	
+								</a>
+							</div>
+						</div>
+						<br>
+				</div>
+				
+			</div>
+		</div>
+
+		{% else %}
+		<div class="row">
+			<div class="col-md-10"  style="text-align: center;margin-left: 5%;margin-right: 5%;">
+				<h3>No Orders in your Cart.</h3><br>
+				<a href="{% url 'shoppingPortalApp:main' %}" style="text-decoration: none;" class="button button3">
+					<i class="fa fa-chevron-circle-left"></i> &nbsp Buy Medicines	
+				</a><br>
+				<a href="{% url 'shopping_cart:order' %}" style="text-decoration: none;" class="button button4">
+					<i class="fa fa-chevron-circle-left"></i> &nbsp Orders History	
+				</a>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+</div><br><br>
+
+	<footer id="footer" class="text-center p-4">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<p>Copyright &copy;
+					<span id="year"></span> FACO</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script>
+	{% for item in order.get_cart_items %}
+
+  $("#{{ item.product.name }}").change(function () {
+    var url = '{% url "shopping_cart:order_summary_ajax" %}';  // get the url of the `load_cities` view
+    var q = $(this).val();  // get the selected country ID from the HTML input
+    console.log(q)
+    $.ajax({                       // initialize an AJAX request
+      url: url,               // set the url of the request (= localhost:8000/hr/ajax/load-cities/)
+      data: {
+        '{{ item.product.name }}': q,    // add the country id to the GET parameters
+      },
+      success: function (data) {   // `data` is the return of the `load_cities` view function
+        
+        // $(".hello").html(data);  // replace the contents of the city input with the data that came from the server
+        console.log(data)
+        // items = document.getElementsByClassName('quantity_no')
+        // item_cnt = 0
+        for (x in data){
+        	document.getElementById('x').innerHTML = data[x];
+        }
+
+      }
+    });
+	window.location.reload();
+	window.location.href=window.location.href;
+
+  });
+  {% endfor %}
+</script>
+
+{% endblock order_summary %}
+
