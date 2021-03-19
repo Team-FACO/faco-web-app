@@ -28,7 +28,7 @@ django-heroku==0.3.1
 django-js-asset==1.1.0
 django-qr-code==1.0.0
 django-widget-tweaks==1.4.2
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 djangorestframework-jwt==1.11.0
 entrypoints==0.2.3
 funcsigs==1.0.2
