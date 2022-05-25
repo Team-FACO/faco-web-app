@@ -73,7 +73,7 @@ psycopg2==2.8.5
 ptyprocess==0.5.2
 Pygments==2.2.0
 PyHamcrest==1.9.0
-PyJWT==1.6.4
+PyJWT==2.4.0
 pylint==2.0.0
 PyPDF2==1.26.0
 PyQRCode==1.2.1
